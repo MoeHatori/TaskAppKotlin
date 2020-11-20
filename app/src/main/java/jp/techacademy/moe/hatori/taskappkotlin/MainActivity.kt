@@ -94,11 +94,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         //検索処理★
+
         search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-
-               if ( query == null){
+                Log.d("Test","処理にはいりました")
+               if ( query == "" ){
                    //nullだったときの処理　リストはそのまま
+                   Log.d("Test","aaa")
                    reloadListView()
                } else {
                    //検索処理　検索されたものを表示
@@ -112,12 +114,16 @@ class MainActivity : AppCompatActivity() {
                    listView1.adapter = mTaskAdapter
                    // 表示を更新するために、アダプターにデータが変更されたことを知らせる
                    mTaskAdapter.notifyDataSetChanged()
+                   Log.d("Test","bbb")
                }
                 return true
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
-                return false
+                if (p0!!.isEmpty()){
+                    reloadListView()
+                }
+                return true
             }
         })
 
